@@ -1,7 +1,7 @@
 const { User } = require("../models");
 const { AuthenticationError } = require("apollo-server-express");
 
-const getMe = async (_, __, { user }) => {
+const me = async (_, __, { user }) => {
   try {
     const foundUser = await User.findById({ _id: user._id });
 
@@ -16,4 +16,4 @@ const getMe = async (_, __, { user }) => {
   }
 };
 
-module.exports = getMe;
+module.exports = me;

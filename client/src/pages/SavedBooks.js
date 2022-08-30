@@ -14,6 +14,7 @@ import Auth from "../utils/auth";
 import { removeBookId } from "../utils/localStorage";
 
 const SavedBooks = () => {
+  let userData;
   const { data, loading } = useQuery(ME);
   const [removeBook] = useMutation(REMOVE_BOOK);
 
@@ -31,7 +32,7 @@ const SavedBooks = () => {
       // upon success, remove book's id from localStorage
       removeBookId(bookId);
     } catch (err) {
-      console.error(err);
+      console.error(err.message);
     }
   };
 
@@ -41,7 +42,7 @@ const SavedBooks = () => {
   }
 
   //setting up data as userData to be able to keep the return as originally set up
-  let userData;
+
   if (data) {
     userData = data.me;
   }
@@ -55,14 +56,14 @@ const SavedBooks = () => {
       </Jumbotron>
       <Container>
         <h2>
-          {userData.savedBooks.length
-            ? `Viewing ${userData.savedBooks.length} saved ${
-                userData.savedBooks.length === 1 ? "book" : "books"
+          {userData?.savedBooks?.length
+            ? `Viewing ${userData?.savedBooks?.length} saved ${
+                userData?.savedBooks?.length === 1 ? "book" : "books"
               }:`
             : "You have no saved books!"}
         </h2>
         <CardColumns>
-          {userData.savedBooks.map((book) => {
+          {userData?.savedBooks?.map((book) => {
             return (
               <Card key={book.bookId} border="dark">
                 {book.image ? (

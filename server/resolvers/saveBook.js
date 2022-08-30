@@ -6,11 +6,7 @@ const saveBook = async (_, { input }, { user }) => {
   try {
     const updatedUser = await User.findByIdAndUpdate(
       { _id: user._id },
-      {
-        $push: {
-          savedBooks: input,
-        },
-      },
+      { $addToSet: { savedBooks: input } },
       { new: true, runValidators: true }
     );
 

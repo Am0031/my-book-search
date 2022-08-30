@@ -2,11 +2,11 @@ const login = require("./login");
 const signup = require("./signup");
 const saveBook = require("./saveBook");
 const removeBook = require("./removeBook");
-const getMe = require("./getMe");
+const me = require("./getMe");
 
 const resolvers = {
   Query: {
-    me: getMe,
+    me,
   },
   Mutation: {
     login,
