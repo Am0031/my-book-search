@@ -32,7 +32,7 @@ const LoginForm = () => {
     try {
       const { data } = await login({
         variables: {
-          loginInput: userFormData,
+          input: userFormData,
         },
       });
       Auth.login(data?.login?.token);

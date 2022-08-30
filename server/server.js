@@ -17,14 +17,6 @@ const server = new ApolloServer({
   context: authMiddleware,
 });
 
-//making express middleware for apollo server
-const startServer = async () => {
-  await server.start();
-  server.applyMiddleware({ app });
-};
-
-startServer();
-
 //express is now called as middleware of apollo server
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -34,6 +26,20 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static(path.join(__dirname, "../client/build")));
 }
 
-db.once("open", () => {
-  app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "../client/"));
 });
+
+//making express middleware for apollo server
+const startServer = async (typeDefs, resolvers) => {
+  await server.start();
+  server.applyMiddleware({ app });
+
+  db.once("open", () => {
+    app.listen(PORT, () =>
+      console.log(`🌍 Now listening on localhost:${PORT}`)
+    );
+  });
+};
+
+startServer(typeDefs, resolvers);

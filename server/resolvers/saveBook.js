@@ -1,4 +1,4 @@
-const { AuthenticationError } = require("apollo-server-express");
+const { ApolloError } = require("apollo-server");
 
 const { User } = require("../models");
 
@@ -13,7 +13,7 @@ const saveBook = async (_, { input }, { user }) => {
     return updatedUser;
   } catch (err) {
     console.log(err);
-    throw new AuthenticationError("Failed to save book");
+    return ApolloError("Failed to save book");
   }
 };
 

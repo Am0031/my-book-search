@@ -1,27 +1,21 @@
-const { AuthenticationError } = require("apollo-server-express");
+const { ApolloError } = require("apollo-server");
 const { User } = require("../models");
 const { signToken } = require("../utils/auth");
 
 const login = async (_, { input }) => {
-  const { email, password } = input;
-
-  const user = await User.findOne({ email });
+  const user = await User.findOne({ email: input.email });
 
   if (!user) {
-    throw new AuthenticationError("User not found");
+    return ApolloError("User not found");
   }
 
-  const correctPw = await user.isCorrectPassword(password);
+  const correctPw = await user.isCorrectPassword(input.password);
 
   if (!correctPw) {
-    throw new AuthenticationError("Wrong password");
+    return ApolloError("Wrong password");
   }
 
-  const token = signToken({
-    id: user._id,
-    email: user.email,
-    username: user.username,
-  });
+  const token = signToken(user);
 
   return { token, user };
 };

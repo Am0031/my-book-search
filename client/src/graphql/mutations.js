@@ -4,11 +4,6 @@ export const LOGIN = gql`
   mutation Mutation($input: LoginInput!) {
     login(input: $input) {
       token
-      user {
-        _id
-        email
-        username
-      }
     }
   }
 `;
@@ -17,11 +12,6 @@ export const SIGNUP = gql`
   mutation Mutation($input: SignupInput!) {
     signup(input: $input) {
       token
-      user {
-        _id
-        email
-        username
-      }
     }
   }
 `;
