@@ -6,8 +6,6 @@ import { LOGIN } from "../graphql/mutations";
 
 import { Form, Button, Alert } from "react-bootstrap";
 
-//remove?
-import { loginUser } from "../utils/API";
 import Auth from "../utils/auth";
 
 const LoginForm = () => {
