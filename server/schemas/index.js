@@ -2,7 +2,7 @@ const { gql } = require("apollo-server");
 
 const typeDefs = gql`
   type Book {
-    bookId: ID!
+    bookId: String!
     authors: [String]
     description: String
     image: String
@@ -46,7 +46,7 @@ const typeDefs = gql`
     signup(input: SignupInput!): AuthResponse
     login(input: LoginInput!): AuthResponse
     saveBook(input: SaveBookInput!): User!
-    removeBook(bookId: ID!): User!
+    removeBook(bookId: String!): User!
   }
 `;
 

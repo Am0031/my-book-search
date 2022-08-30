@@ -4,7 +4,7 @@ const { ApolloError } = require("apollo-server");
 
 const me = async (_, __, { user }) => {
   try {
-    const foundUser = await User.findById({ _id: user._id });
+    const foundUser = await User.findById({ _id: user.id });
 
     if (!foundUser) {
       return ApolloError("Cannot find a user with this id!");
