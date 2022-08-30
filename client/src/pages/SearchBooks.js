@@ -54,7 +54,7 @@ const SearchBooks = () => {
         bookId: book.id,
         authors: book.volumeInfo.authors || ["No author to display"],
         title: book.volumeInfo.title,
-        description: book.volumeInfo.description,
+        description: book.volumeInfo.description || "No description to display",
         image: book.volumeInfo.imageLinks?.thumbnail || "",
       }));
 
@@ -67,8 +67,11 @@ const SearchBooks = () => {
 
   // create function to handle saving a book to our database
   const handleSaveBook = async (bookId) => {
+    console.log(bookId);
     // find the book in `searchedBooks` state by the matching id
     const bookToSave = searchedBooks.find((book) => book.bookId === bookId);
+
+    console.log(bookToSave);
 
     // get token
     const token = Auth.loggedIn() ? Auth.getToken() : null;
@@ -77,17 +80,24 @@ const SearchBooks = () => {
       return false;
     }
 
+    const user = Auth.getUser();
+    console.log(user);
     try {
-      await saveBook({
+      const savedBook = await saveBook({
         variables: {
           input: bookToSave,
+          user,
         },
       });
+      console.log(savedBook);
 
-      // if book successfully saves to user's account, save book id to state
-      setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      if (savedBook) {
+        console.log("saving book ID locally");
+        // if book successfully saves to user's account, save book id to state
+        setSavedBookIds([...savedBookIds, bookToSave.bookId]);
+      }
     } catch (err) {
-      console.error(err);
+      console.log(err);
     }
   };
 
