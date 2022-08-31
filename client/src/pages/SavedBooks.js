@@ -26,11 +26,9 @@ const SavedBooks = () => {
       return false;
     }
 
-    const user = Auth.getUser();
-
     try {
       const removedBook = await removeBook({
-        variables: { bookId: bookId, user: user },
+        variables: { bookId },
       });
 
       if (removedBook) {

@@ -4,7 +4,7 @@ const { User } = require("../models");
 
 const removeBook = async (_, { bookId }, { user }) => {
   const updatedUser = await User.findByIdAndUpdate(
-    { _id: user.id },
+    { _id: user._id },
     { $pull: { savedBooks: { $elemMatch: { bookId: bookId } } } },
     { new: true }
   );

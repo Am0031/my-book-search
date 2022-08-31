@@ -13,7 +13,7 @@ const saveBook = async (_, { input }, { user }) => {
       link: input.link || "No link",
     };
     const updatedUser = await User.findByIdAndUpdate(
-      { _id: user.id },
+      { _id: user._id },
       { $addToSet: { savedBooks: checkedInput } },
       { new: true, runValidators: true }
     );

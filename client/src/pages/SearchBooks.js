@@ -77,13 +77,10 @@ const SearchBooks = () => {
       return false;
     }
 
-    const user = Auth.getUser();
-
     try {
       const savedBook = await saveBook({
         variables: {
           input: bookToSave,
-          user,
         },
       });
 
