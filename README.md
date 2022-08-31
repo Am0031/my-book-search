@@ -8,7 +8,7 @@ This project is about refactoring a book search app setup from RESTful API to Gr
 
 ## Project Links
 
-Deployed page : [https://am0031.github.io/my-book-search](https://am0031.github.io/my-book-search)
+Deployed page : [https://peaceful-island-50238.herokuapp.com/](https://peaceful-island-50238.herokuapp.com/)
 
 Github repo : [https://github.com/Am0031/my-book-search](https://github.com/Am0031/my-book-search)
 
