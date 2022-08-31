@@ -3,9 +3,9 @@ const { ApolloError } = require("apollo-server");
 const { User } = require("../models");
 
 const removeBook = async (_, { bookId }, { user }) => {
-  const updatedUser = await User.findByIdAndUpdate(
+  const updatedUser = await User.findOneAndUpdate(
     { _id: user._id },
-    { $pull: { savedBooks: { $elemMatch: { bookId: bookId } } } },
+    { $pull: { savedBooks: { bookId: bookId } } },
     { new: true }
   );
 
